@@ -6,6 +6,7 @@
     android:weightSum="100">
 
     <LinearLayout
+        android:id="@+id/LinearLayout_InfoButtons"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight = "10"
@@ -26,6 +27,7 @@
 
     </LinearLayout>
     <LinearLayout
+        android:id="@+id/LinearLayout_ImageView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight = "45"
@@ -42,6 +44,7 @@
 
     </LinearLayout>
     <LinearLayout
+        android:id="@+id/LinearLayout_ViewButtons"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight = "10"
@@ -113,11 +116,12 @@
 
 
     <LinearLayout
+        android:id="@+id/LinearLayout_LetterButtons1"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight = "17"
+        android:layout_weight="17"
 
-        android:weightSum="5" >
+        android:weightSum="5">
 
         <Button
             android:id="@+id/button_letter_0"
@@ -132,18 +136,21 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="test" />
+
         <Button
             android:id="@+id/button_letter_2"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="test" />
+
         <Button
             android:id="@+id/button_letter_3"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="test" />
+
         <Button
             android:id="@+id/button_letter_4"
             android:layout_width="0dp"
@@ -153,7 +160,9 @@
 
 
     </LinearLayout>
+
     <LinearLayout
+        android:id="@+id/LinearLayout_LetterButtons2"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight = "18"
@@ -173,12 +182,14 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="test" />
+
         <Button
             android:id="@+id/button_letter_7"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="test" />
+
         <Button
             android:id="@+id/button_letter_8"
             android:layout_width="0dp"
