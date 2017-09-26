@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
             button_view_pressed[i] = false;
         }
 
-        nextQuestion(new Question("hallohallo"));
+        nextQuestion(new Question("hallohallooooo"));
 
     }
 
@@ -170,7 +170,9 @@ public class MainActivity extends AppCompatActivity {
         // Weißt jedem Button einen buchstaben zu
         for(int i = 0;i<_question.Name.length();i++)
         {
-            button_letters.get(i).setText(_question.letters.get((Integer)_question.boxes.get(i)));
+            // Letter Button (nmr :frage.boxen(i)) auf
+            button_letters.get((Integer)_question.boxes.get(i)).setText(_question.letters.get(i));
+
         }
     }
 

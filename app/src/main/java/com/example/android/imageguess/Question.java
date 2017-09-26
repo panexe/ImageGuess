@@ -37,12 +37,23 @@ public class Question {
 
     public Question(String _name)
     {
-        Name = _name;
+        if(_name.length()<11){
+        Name = _name;}
+        else{Name =_name.substring(0,10);}
         answered = false;
         for( int i = 0; i< Name.length();i++)
         {
             letters.add(String.valueOf(Name.charAt(i)));
             boxes.add(random.nextInt(Name.length()));
         }
+        int temp = 0;
+        do{
+            temp = random.nextInt(Name.length());
+            if(!boxes.contains(temp)) {
+                boxes.add(temp);
+            }
+
+        }
+        while (boxes.size()<10);
     }
 }
