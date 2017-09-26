@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import static android.view.View.*;
 
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
             button_views.get(i).setOnClickListener(clickListener);
             button_letters.get(i).setOnClickListener(clickListener);
         }
+        button_views.get(0).setOnClickListener((clickListener));
 
     }
 
@@ -82,15 +84,23 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             for (int i = 0; i < 10; i++) {
+                // EventHandler Eingabe Buttons
                 if (view == button_letters.get(i))
                 {
                     getFirstEmptyView().setText(button_letters.get(i).getText());
-                    LL_ViewButtons.setWeightSum(3);
+
                 }
+
+                //Eventhandler Anzeige Buttons
                 if (button_letters.get(i) == view)
                 {
                     button_letters.get(i).setText("hallo");
                     LL_ViewButtons.setWeightSum(3);
+                }
+                // Eventhandler InfoButton
+                if(button_infos.get(0)== view)
+                {
+                    //evntl. Buy Hint
                 }
 
 
@@ -113,6 +123,19 @@ public class MainActivity extends AppCompatActivity {
         return null;
     }
 
-}
+    public void nextQuestion(Question _question)
+    {
+        LL_ViewButtons.setWeightSum(_question.Name.length());
+
+        for(int i = 0;i<_question.Name.length();i++)
+        {
+            button_letters.get(i).setText(_question.letters.get((Integer)_question.boxes.get(i)));
+        }
+        }
+
+    }
+
+
+
 
 
