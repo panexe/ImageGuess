@@ -136,6 +136,8 @@ public class MainActivity extends AppCompatActivity {
         {
             button_letters.get(i).setText(_question.letters.get((Integer)_question.boxes.get(i)));
         }
+
+        Anzeige.setImageResource(_question.ImgReturn());
     }
 
 }
