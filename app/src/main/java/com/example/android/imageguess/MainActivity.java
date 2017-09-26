@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
     LinearLayout LL_ViewButtons;
 
+    Question currentQuestion;
     ImageView Anzeige;
 
     @Override
@@ -92,10 +93,11 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 //Eventhandler Anzeige Buttons
-                if (button_letters.get(i) == view)
+                if (button_views.get(i) == view)
                 {
-                    button_letters.get(i).setText("hallo");
-                    LL_ViewButtons.setWeightSum(3);
+                    button_letters.get(currentQuestion.boxes.get(i)).setText(button_views.get(i).getText());
+                    button_views.get(i).setText("");
+
                 }
                 // Eventhandler InfoButton
                 if(button_infos.get(0)== view)
@@ -125,15 +127,18 @@ public class MainActivity extends AppCompatActivity {
 
     public void nextQuestion(Question _question)
     {
+        currentQuestion = _question;
+        // Setzen der Button-Anzahl
         LL_ViewButtons.setWeightSum(_question.Name.length());
 
+        // Weißt jedem Button einen buchstaben zu
         for(int i = 0;i<_question.Name.length();i++)
         {
             button_letters.get(i).setText(_question.letters.get((Integer)_question.boxes.get(i)));
         }
-        }
-
     }
+
+}
 
 
 
