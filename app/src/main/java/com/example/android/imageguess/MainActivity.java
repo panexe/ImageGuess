@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
             button_view_pressed[i] = false;
         }
 
-        nextQuestion(new Question("sivic"));
+        nextQuestion(new Question());
 
     }
 
@@ -99,6 +99,9 @@ public class MainActivity extends AppCompatActivity {
                 // EventHandler Eingabe Buttons
                 if (view == button_letters.get(i))
                 {
+
+
+
                     if(button_pressed[i] == false) {
                         // Setzt Letter Button gedrückt
                         button_pressed[i] = true;
@@ -112,8 +115,10 @@ public class MainActivity extends AppCompatActivity {
                         button_letters.get(i).setText("");
 
                         if(checkSolution()){
-                            nextQuestion(new Question("foerster"));
+                            nextQuestion(new Question());
                         }
+
+
 
                     }else{}
                 }
@@ -154,11 +159,15 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean checkSolution(){
         String solution = "";
+
         for(int i = 0; i<currentQuestion.Name.length();i++) {
             solution += button_views.get(i).getText();
         }
-        if(solution.toUpperCase() == currentQuestion.Name.toUpperCase())
+        button_infos.get(0).setText(solution);
+        button_infos.get(1).setText(currentQuestion.Name.toUpperCase());
+        if(solution.toUpperCase().equals(currentQuestion.Name.toUpperCase()))
         {
+
             return true;
         }
         return false;
@@ -181,6 +190,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void nextQuestion(Question _question)
     {
+        for(int i = 0 ; i< 10;i++){
+            button_views.get(i).setText("");
+            button_view_pressed[i] = false;
+            button_pressed[i] = false;
+        }
         currentQuestion = _question;
         // Setzen der Button-Anzahl
         LL_ViewButtons.setWeightSum(_question.Name.length());

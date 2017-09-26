@@ -1,5 +1,8 @@
 package com.example.android.imageguess;
 
+import android.content.Context;
+import android.content.res.Resources;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -16,8 +19,8 @@ public class Question {
     List<String> letters = new ArrayList<>();
     List<Integer> boxes = new ArrayList<>();
     Random random = new Random();
-
-
+    int image = 0;
+    Resources res;
     private int[] img = {R.drawable.amazon,R.drawable.barbie,R.drawable.blockbuster,R.drawable.bmw,R.drawable.burgerking,
            R.drawable.canon,R.drawable.citroen,R.drawable.ebay,R.drawable.flickr,R.drawable.hp,R.drawable.ibm};
     private int randint = random.nextInt(img.length);
@@ -36,11 +39,11 @@ public class Question {
 
 
 
-    public Question(String _name)
+    public Question()
     {
-        if(_name.length()<11){
-        Name = _name;}
-        else{Name =_name.substring(0,10);}
+        image = ImgReturn();
+        Name = res.getResourceName(image);
+
         answered = false;
         for( int i = 0; i< Name.length();i++)
         {
