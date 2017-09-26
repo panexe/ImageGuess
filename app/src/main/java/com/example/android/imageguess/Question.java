@@ -17,15 +17,16 @@ public class Question {
     Random random = new Random();
 
 
-    private int[] img = {R.drawable.Amazon,R.drawable.Barbie,R.drawable.Blockbuster,R.drawable.BMW,R.drawable.BurgerKing,
-            R.drawable.Canon,R.drawable.Citroen,R.drawable.Ebay,R.drawable.Flickr,R.drawable.HP,R.drawable.IBM};
-    private int randint = random.nextInt(img.length);
+    //private int[] img = {R.drawable.Amazon,R.drawable.Barbie,R.drawable.Blockbuster,R.drawable.BMW,R.drawable.BurgerKing,
+    //        R.drawable.Canon,R.drawable.Citroen,R.drawable.Ebay,R.drawable.Flickr,R.drawable.HP,R.drawable.IBM};
+    //private int randint = random.nextInt(img.length);
 
 
 
     public int ImgReturn()
     {
-        return img[randint];
+     //   return img[randint];
+        return 0;
     }
 
 
@@ -37,7 +38,7 @@ public class Question {
     public Question(String _name)
     {
         Name = _name;
-
+        answered = false;
         for( int i = 0; i< Name.length();i++)
         {
             letters.add(String.valueOf(Name.charAt(i)));

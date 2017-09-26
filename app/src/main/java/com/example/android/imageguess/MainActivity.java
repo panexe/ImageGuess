@@ -18,6 +18,10 @@ public class MainActivity extends AppCompatActivity {
     List<Button> button_views = new ArrayList<>();
     List<Button> button_letters = new ArrayList<>();
     List<Button> button_infos = new ArrayList<>();
+    Boolean[] button_pressed = new Boolean[10];
+    Boolean[] button_view_pressed = new Boolean[10];
+    Integer[] button_assosiation = new Integer[10];
+
 
     LinearLayout LL_ViewButtons;
 
@@ -37,6 +41,13 @@ public class MainActivity extends AppCompatActivity {
             button_letters.get(i).setOnClickListener(clickListener);
         }
         button_views.get(0).setOnClickListener((clickListener));
+
+        for (int i = 0; i < button_pressed.length; i++) {
+            button_pressed[i] = false;
+            button_view_pressed[i] = false;
+        }
+
+        nextQuestion(new Question("hallohallo"));
 
     }
 
@@ -88,15 +99,40 @@ public class MainActivity extends AppCompatActivity {
                 // EventHandler Eingabe Buttons
                 if (view == button_letters.get(i))
                 {
-                    getFirstEmptyView().setText(button_letters.get(i).getText());
+                    if(button_pressed[i] == false) {
+                        // Setzt Letter Button gedrückt
+                        button_pressed[i] = true;
+                        //Setzt anzeigebutton auf gedrückt
+                        button_view_pressed[button_views.indexOf(getFirstEmptyView())] = true;
+                        // Setzt ersten freien Anzeigebutton auf text von Letter Button
+                        button_assosiation[button_views.indexOf(getFirstEmptyView())] = i;
 
+                        getFirstEmptyView().setText(button_letters.get(i).getText());
+
+                        button_letters.get(i).setText("");
+                    }else{}
                 }
 
                 //Eventhandler Anzeige Buttons
                 if (button_views.get(i) == view)
                 {
-                    button_letters.get(currentQuestion.boxes.get(i)).setText(button_views.get(i).getText());
-                    button_views.get(i).setText("");
+                    // Falls AnzeigeButton nicht gedrückt
+                    if(button_view_pressed[i] == false) {
+                        // auf gedrückt gesetzt
+                        //button_view_pressed[i] = true;
+                        // Anzeigebutton text leeren
+                        //button_views.get(i).setText("");
+                    }else{
+                        // Setzt Anzeige Button als gedrückt
+                        button_view_pressed[i] = false;
+                        // Setzt Letter Button als ungedrückt
+                        //button_pressed[currentQuestion.boxes.get(i)] = false;
+                        button_pressed[button_assosiation[i]] = false;
+                        // Setzt entsprechenden Letter Button Text zu dem vom View Button
+                        button_letters.get(button_assosiation[i]).setText(button_views.get(i).getText());
+                        button_views.get(i).setText("");
+
+                    }
 
                 }
                 // Eventhandler InfoButton
