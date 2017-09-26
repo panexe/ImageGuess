@@ -1,5 +1,11 @@
 package com.example.android.imageguess;
 
+
+import android.widget.ImageView;
+
+import com.example.android.imageguess.R;
+
+
 import java.util.Random;
 
 /**
@@ -7,8 +13,17 @@ import java.util.Random;
  */
 
 public class Question {
-    Random rand = new Random();
-    int[] img = {R.drawable.image0,R.drawable.image1,}
+    private Random rand = new Random();
+    private int[] img = {R.drawable.images,R.drawable.images1};
+    private int randint = rand.nextInt(img.length);
+
+
+
+    public int ImgReturn()
+    {
+        return img[randint];
+    }
+
 
 
 }
