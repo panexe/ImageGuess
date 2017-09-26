@@ -12,13 +12,14 @@ public class Question {
     String Name;
     boolean answered;
 
+    String abc = "abcdefghijklmnopqrstuvwxyz";
     List<String> letters = new ArrayList<>();
     List<Integer> boxes = new ArrayList<>();
     Random random = new Random();
 
 
-    private int[] img = {R.drawable.Amazon,R.drawable.Barbie,R.drawable.Blockbuster,R.drawable.BMW,R.drawable.BurgerKing,
-           R.drawable.Canon,R.drawable.Citroen,R.drawable.Ebay,R.drawable.Flickr,R.drawable.HP,R.drawable.IBM};
+    private int[] img = {R.drawable.amazon,R.drawable.barbie,R.drawable.blockbuster,R.drawable.bmw,R.drawable.burgerking,
+           R.drawable.canon,R.drawable.citroen,R.drawable.ebay,R.drawable.flickr,R.drawable.hp,R.drawable.ibm};
     private int randint = random.nextInt(img.length);
 
 
@@ -44,11 +45,17 @@ public class Question {
         for( int i = 0; i< Name.length();i++)
         {
             letters.add(String.valueOf(Name.charAt(i)));
-            boxes.add(random.nextInt(Name.length()));
+
         }
+        do
+        {
+            letters.add(Character.toString(abc.charAt(random.nextInt(26))));
+        }while(letters.size()!=10);
+
+
         int temp = 0;
         do{
-            temp = random.nextInt(Name.length());
+            temp = random.nextInt(10);
             if(!boxes.contains(temp)) {
                 boxes.add(temp);
             }

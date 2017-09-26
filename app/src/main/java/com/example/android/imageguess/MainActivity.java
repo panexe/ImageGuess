@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
             button_view_pressed[i] = false;
         }
 
-        nextQuestion(new Question("hallohallooooo"));
+        nextQuestion(new Question("sivic"));
 
     }
 
@@ -110,6 +110,11 @@ public class MainActivity extends AppCompatActivity {
                         getFirstEmptyView().setText(button_letters.get(i).getText());
 
                         button_letters.get(i).setText("");
+
+                        if(checkSolution()){
+                            nextQuestion(new Question("foerster"));
+                        }
+
                     }else{}
                 }
 
@@ -132,6 +137,7 @@ public class MainActivity extends AppCompatActivity {
                         button_letters.get(button_assosiation[i]).setText(button_views.get(i).getText());
                         button_views.get(i).setText("");
 
+
                     }
 
                 }
@@ -145,6 +151,18 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     };
+
+    private boolean checkSolution(){
+        String solution = "";
+        for(int i = 0; i<currentQuestion.Name.length();i++) {
+            solution += button_views.get(i).getText();
+        }
+        if(solution.toUpperCase() == currentQuestion.Name.toUpperCase())
+        {
+            return true;
+        }
+        return false;
+    }
 
 
     private Button getFirstEmptyView()
@@ -168,7 +186,7 @@ public class MainActivity extends AppCompatActivity {
         LL_ViewButtons.setWeightSum(_question.Name.length());
 
         // Weißt jedem Button einen buchstaben zu
-        for(int i = 0;i<_question.Name.length();i++)
+        for(int i = 0;i<_question.letters.size();i++)
         {
             // Letter Button (nmr :frage.boxen(i)) auf
             button_letters.get((Integer)_question.boxes.get(i)).setText(_question.letters.get(i));
