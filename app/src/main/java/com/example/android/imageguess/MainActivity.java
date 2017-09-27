@@ -1,6 +1,5 @@
 package com.example.android.imageguess;
 
-import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -23,9 +22,7 @@ public class MainActivity extends AppCompatActivity {
     Boolean[] button_view_pressed = new Boolean[10];
     Integer[] button_assosiation = new Integer[10];
 
-    Player player;
 
-    Context context;
     LinearLayout LL_ViewButtons;
 
     Question currentQuestion;
@@ -37,9 +34,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         initComponents();
-
-        player = new Player("Emil",0);
-        context = this.getApplicationContext();
 
         for(int i = 0; i< 10; i++)
         {
@@ -53,8 +47,7 @@ public class MainActivity extends AppCompatActivity {
             button_view_pressed[i] = false;
         }
 
-
-        nextQuestion(new Question(context,player.getFortschritt()));
+        nextQuestion(new Question("sivic"));
 
     }
 
@@ -106,9 +99,6 @@ public class MainActivity extends AppCompatActivity {
                 // EventHandler Eingabe Buttons
                 if (view == button_letters.get(i))
                 {
-
-
-
                     if(button_pressed[i] == false) {
                         // Setzt Letter Button gedrückt
                         button_pressed[i] = true;
@@ -122,10 +112,8 @@ public class MainActivity extends AppCompatActivity {
                         button_letters.get(i).setText("");
 
                         if(checkSolution()){
-                            nextQuestion(new Question(context,player.getFortschritt()));
+                            nextQuestion(new Question("foerster"));
                         }
-
-
 
                     }else{}
                 }
@@ -166,15 +154,11 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean checkSolution(){
         String solution = "";
-
         for(int i = 0; i<currentQuestion.Name.length();i++) {
             solution += button_views.get(i).getText();
         }
-        button_infos.get(0).setText(solution);
-        button_infos.get(1).setText(currentQuestion.Name.toUpperCase());
-        if(solution.toUpperCase().equals(currentQuestion.Name.toUpperCase()))
+        if(solution.toUpperCase() == currentQuestion.Name.toUpperCase())
         {
-
             return true;
         }
         return false;
@@ -197,16 +181,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void nextQuestion(Question _question)
     {
-        // Setzt den Fortschritt auf die Nächste Frage
-        player.addFortschritt();
-
-        // setzt bool array der buttons zurück
-        for(int i = 0 ; i< 10;i++){
-            button_views.get(i).setText("");
-            button_view_pressed[i] = false;
-            button_pressed[i] = false;
-        }
-        // setzt neue question
         currentQuestion = _question;
         // Setzen der Button-Anzahl
         LL_ViewButtons.setWeightSum(_question.Name.length());
@@ -218,8 +192,10 @@ public class MainActivity extends AppCompatActivity {
             button_letters.get((Integer)_question.boxes.get(i)).setText(_question.letters.get(i));
 
         }
+        // Legt das neue Bild fest
+        Anzeige.setImageResource(_question.ImgReturn());
+        //
 
-        //Anzeige.setImageResource(_question.ImgReturn());
     }
 
 }
