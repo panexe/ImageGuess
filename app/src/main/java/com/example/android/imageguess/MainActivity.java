@@ -1,6 +1,7 @@
 package com.example.android.imageguess;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     Boolean firstQuestion;
     Player player;
 
+    SharedPreferences sp;
     Context context;
     LinearLayout LL_ViewButtons;
 
@@ -38,8 +40,12 @@ public class MainActivity extends AppCompatActivity {
 
         initComponents();
 
-        firstQuestion = true;
-        player = new Player("Emil",0);
+        //speicherung
+        sp = getSharedPreferences("your_prefs", context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+
+        player = new Player("Emil",sp.getInt("key_fortschritt",context.MODE_PRIVATE),sp.getInt("key_punkte",context.MODE_PRIVATE));
+
         context = this.getApplicationContext();
 
         for(int i = 0; i< 10; i++)
@@ -53,9 +59,25 @@ public class MainActivity extends AppCompatActivity {
             button_pressed[i] = false;
             button_view_pressed[i] = false;
         }
+        button_infos.get(1).setText(Integer.toString(sp.getInt("key_fortschritt",context.MODE_PRIVATE)));
+        firstQuestion = true;
 
 
         nextQuestion(new Question(context,player.getFortschritt()));
+
+
+    }
+
+    @Override
+    protected void onStop(){
+        super.onStop();
+
+        // Speicherung
+        sp = getSharedPreferences("your_prefs", context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putInt("key_fortschritt", player.getFortschritt());
+        editor.putInt("key_punkte",player.getPunkte());
+        editor.commit();
 
     }
 
@@ -96,7 +118,6 @@ public class MainActivity extends AppCompatActivity {
         LL_ViewButtons = (LinearLayout) findViewById(R.id.LinearLayout_ViewButtons);
 
         LL_ViewButtons.setWeightSum(10);
-
 
     }
 
@@ -206,11 +227,14 @@ public class MainActivity extends AppCompatActivity {
     public void nextQuestion(Question _question)
     {
         // Setzt den Fortschritt auf die Nächste Frage
-        player.addFortschritt();
-        if(!firstQuestion) {
-            player.addPunkte();
+
+        if(firstQuestion) {
+            firstQuestion = false;
+
+
         }
-        else{firstQuestion = false;}
+        else{player.addFortschritt();
+            player.addPunkte();}
 
 
         int Punkte = player.getPunkte();

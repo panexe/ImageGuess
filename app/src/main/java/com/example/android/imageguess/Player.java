@@ -11,9 +11,9 @@ public class Player {
     int Punkte;
     int Fortschritt;
 
-    public Player(String _name ,int _fortschritt)
+    public Player(String _name ,int _fortschritt , int _punkte)
     {
-        Punkte = 0;
+        Punkte = _punkte;
         Name = _name;
         Fortschritt = _fortschritt;
     }
