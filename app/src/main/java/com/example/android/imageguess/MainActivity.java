@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
         initComponents();
 
-        player = new Player("Emil",0);
+        player = new Player("Emil",13);
         context = this.getApplicationContext();
 
         for(int i = 0; i< 10; i++)
@@ -167,17 +167,18 @@ public class MainActivity extends AppCompatActivity {
     private boolean checkSolution(){
         String solution = "";
 
+        // Fügt die buchstaben zu einem string zusammen
         for(int i = 0; i<currentQuestion.Name.length();i++) {
             solution += button_views.get(i).getText();
         }
-        button_infos.get(0).setText(solution);
-        button_infos.get(1).setText(currentQuestion.Name.toUpperCase());
-        if(solution.toUpperCase().equals(currentQuestion.Name.toUpperCase()))
-        {
+        //button_infos.get(0).setText(solution);
+        //button_infos.get(1).setText(currentQuestion.Name.toUpperCase());
+        try {
+            return solution.toUpperCase().equals(currentQuestion.Name.toUpperCase());
+        }catch (Exception ex){
+            return false;
 
-            return true;
         }
-        return false;
     }
 
 
@@ -203,6 +204,7 @@ public class MainActivity extends AppCompatActivity {
         // setzt bool array der buttons zurück
         for(int i = 0 ; i< 10;i++){
             button_views.get(i).setText("");
+            button_letters.get(i).setText("");
             button_view_pressed[i] = false;
             button_pressed[i] = false;
         }
@@ -215,11 +217,11 @@ public class MainActivity extends AppCompatActivity {
         for(int i = 0;i<_question.letters.size();i++)
         {
             // Letter Button (nmr :frage.boxen(i)) auf
-            button_letters.get((Integer)_question.boxes.get(i)).setText(_question.letters.get(i));
+            button_letters.get(_question.boxes.get(i)).setText(_question.letters.get(i));
 
         }
 
-        //Anzeige.setImageResource(_question.ImgReturn());
+        Anzeige.setImageResource(_question.getPictureResource().getImage());
     }
 
 }

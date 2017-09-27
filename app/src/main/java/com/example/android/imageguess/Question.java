@@ -36,6 +36,10 @@ public class Question {
 
         //Name = res.getResourceName(image);
         Name = res.Name;
+        if(Name.length() >= 10){
+            String s = Name;
+            Name = s.substring(0,9);
+        }
         answered = false;
         for( int i = 0; i< Name.length();i++)
         {
@@ -57,5 +61,9 @@ public class Question {
 
         }
         while (boxes.size()<10);
+    }
+
+    public PictureResource getPictureResource(){
+        return res;
     }
 }
