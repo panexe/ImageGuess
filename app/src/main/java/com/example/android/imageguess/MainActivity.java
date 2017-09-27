@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     Boolean[] button_pressed = new Boolean[10];
     Boolean[] button_view_pressed = new Boolean[10];
     Integer[] button_assosiation = new Integer[10];
-
+    Boolean firstQuestion;
     Player player;
 
     Context context;
@@ -38,7 +38,8 @@ public class MainActivity extends AppCompatActivity {
 
         initComponents();
 
-        player = new Player("Emil",13);
+        firstQuestion = true;
+        player = new Player("Emil",0);
         context = this.getApplicationContext();
 
         for(int i = 0; i< 10; i++)
@@ -103,13 +104,18 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             for (int i = 0; i < 10; i++) {
+                //eventhandler infobutton 2
+                if(view == button_infos.get(1))
+                {
+
+                }
                 // EventHandler Eingabe Buttons
                 if (view == button_letters.get(i))
                 {
+                    if(button_views.indexOf(getFirstEmptyView()) < currentQuestion.Name.length()) {
 
 
-
-                    if(button_pressed[i] == false) {
+                    if (button_pressed[i] == false) {
                         // Setzt Letter Button gedrückt
                         button_pressed[i] = true;
                         //Setzt anzeigebutton auf gedrückt
@@ -121,13 +127,14 @@ public class MainActivity extends AppCompatActivity {
 
                         button_letters.get(i).setText("");
 
-                        if(checkSolution()){
-                            nextQuestion(new Question(context,player.getFortschritt()));
+                        if (checkSolution()) {
+                            nextQuestion(new Question(context, player.getFortschritt()));
                         }
 
 
-
-                    }else{}
+                    } else {
+                    }
+                }
                 }
 
                 //Eventhandler Anzeige Buttons
@@ -200,7 +207,14 @@ public class MainActivity extends AppCompatActivity {
     {
         // Setzt den Fortschritt auf die Nächste Frage
         player.addFortschritt();
+        if(!firstQuestion) {
+            player.addPunkte();
+        }
+        else{firstQuestion = false;}
 
+
+        int Punkte = player.getPunkte();
+        button_infos.get(0).setText(Integer.toString(Punkte));
         // setzt bool array der buttons zurück
         for(int i = 0 ; i< 10;i++){
             button_views.get(i).setText("");

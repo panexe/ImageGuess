@@ -13,6 +13,7 @@ public class Player {
 
     public Player(String _name ,int _fortschritt)
     {
+        Punkte = 0;
         Name = _name;
         Fortschritt = _fortschritt;
     }
@@ -26,4 +27,6 @@ public class Player {
     public void addFortschritt(){
         Fortschritt++;
     }
+    public void addPunkte(){Punkte += 100;}
+    public int getPunkte(){return Punkte;}
 }
