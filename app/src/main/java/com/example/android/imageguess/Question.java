@@ -14,36 +14,28 @@ import java.util.Random;
 public class Question {
     String Name;
     boolean answered;
+    PictureResource res;
+
 
     String abc = "abcdefghijklmnopqrstuvwxyz";
     List<String> letters = new ArrayList<>();
     List<Integer> boxes = new ArrayList<>();
     Random random = new Random();
-    int image = 0;
-    Resources res;
-    private int[] img = {R.drawable.amazon,R.drawable.barbie,R.drawable.blockbuster,R.drawable.bmw,R.drawable.burgerking,
-           R.drawable.canon,R.drawable.citroen,R.drawable.ebay,R.drawable.flickr,R.drawable.hp,R.drawable.ibm};
-    private int randint = random.nextInt(img.length);
 
 
 
-    public int ImgReturn()
+
+
+
+
+
+
+    public Question(Context context , int Fortschritt)
     {
-        return img[randint];
+        res = new PictureResource(Fortschritt,context);
 
-    }
-
-
-
-
-
-
-
-    public Question()
-    {
-        image = ImgReturn();
-        Name = res.getResourceName(image);
-
+        //Name = res.getResourceName(image);
+        Name = res.Name;
         answered = false;
         for( int i = 0; i< Name.length();i++)
         {

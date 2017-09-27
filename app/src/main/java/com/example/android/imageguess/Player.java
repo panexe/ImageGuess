@@ -11,8 +11,19 @@ public class Player {
     int Punkte;
     int Fortschritt;
 
-    public Player()
+    public Player(String _name ,int _fortschritt)
     {
+        Name = _name;
+        Fortschritt = _fortschritt;
+    }
 
+    public String getName(){
+        return Name;
+    }
+    public int getFortschritt(){
+        return Fortschritt;
+    }
+    public void addFortschritt(){
+        Fortschritt++;
     }
 }

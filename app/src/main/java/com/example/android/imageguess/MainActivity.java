@@ -1,5 +1,6 @@
 package com.example.android.imageguess;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -22,7 +23,9 @@ public class MainActivity extends AppCompatActivity {
     Boolean[] button_view_pressed = new Boolean[10];
     Integer[] button_assosiation = new Integer[10];
 
+    Player player;
 
+    Context context;
     LinearLayout LL_ViewButtons;
 
     Question currentQuestion;
@@ -34,6 +37,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         initComponents();
+
+        player = new Player("Emil",0);
+        context = this.getApplicationContext();
 
         for(int i = 0; i< 10; i++)
         {
@@ -47,7 +53,8 @@ public class MainActivity extends AppCompatActivity {
             button_view_pressed[i] = false;
         }
 
-        nextQuestion(new Question());
+
+        nextQuestion(new Question(context,player.getFortschritt()));
 
     }
 
@@ -115,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
                         button_letters.get(i).setText("");
 
                         if(checkSolution()){
-                            nextQuestion(new Question());
+                            nextQuestion(new Question(context,player.getFortschritt()));
                         }
 
 
@@ -190,11 +197,16 @@ public class MainActivity extends AppCompatActivity {
 
     public void nextQuestion(Question _question)
     {
+        // Setzt den Fortschritt auf die Nächste Frage
+        player.addFortschritt();
+
+        // setzt bool array der buttons zurück
         for(int i = 0 ; i< 10;i++){
             button_views.get(i).setText("");
             button_view_pressed[i] = false;
             button_pressed[i] = false;
         }
+        // setzt neue question
         currentQuestion = _question;
         // Setzen der Button-Anzahl
         LL_ViewButtons.setWeightSum(_question.Name.length());
@@ -207,7 +219,7 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
-        Anzeige.setImageResource(_question.ImgReturn());
+        //Anzeige.setImageResource(_question.ImgReturn());
     }
 
 }
