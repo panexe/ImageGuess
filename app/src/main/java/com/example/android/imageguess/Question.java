@@ -7,52 +7,53 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-/**
- * Created by Lars on 25.09.2017.
- */
 
-public class Question {
+
+class Question {
+
     String Name;
-    boolean answered;
-    PictureResource res;
+    private PictureResource res;
 
+    // Alphabet
+    private String abc;
 
-    String abc = "abcdefghijklmnopqrstuvwxyz";
     List<String> letters = new ArrayList<>();
     List<Integer> boxes = new ArrayList<>();
-    Random random = new Random();
+    private Random random = new Random();
 
 
 
-
-
-
-
-
-
-    public Question(Context context , int Fortschritt)
+    Question(Context context, int Fortschritt)
     {
+        // Bild zur Frage
         res = new PictureResource(Fortschritt,context);
 
-        //Name = res.getResourceName(image);
+        abc = "abcdefghijklmnopqrstuvwxyz";
         Name = res.Name;
+
+        // Begrenzt Namen auf 10 Zeichen
         if(Name.length() >= 10){
             String s = Name;
             Name = s.substring(0,9);
         }
-        answered = false;
+
+        //Fügt Namen zum Buchstabenarray hinzu
         for( int i = 0; i< Name.length();i++)
         {
             letters.add(String.valueOf(Name.charAt(i)));
 
         }
+
+        // Füllt Namen <10 Buchstaben mit zufälligen auf
+
         do
         {
             letters.add(Character.toString(abc.charAt(random.nextInt(26))));
         }while(letters.size()!=10);
 
 
-        int temp = 0;
+        int temp;
+        // Verteilt Buchstaben zufällig auf die 10 Buchstaben-Buttons
         do{
             temp = random.nextInt(10);
             if(!boxes.contains(temp)) {
@@ -63,7 +64,7 @@ public class Question {
         while (boxes.size()<10);
     }
 
-    public PictureResource getPictureResource(){
+    PictureResource getPictureResource(){
         return res;
     }
 }

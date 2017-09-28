@@ -2,12 +2,14 @@ package com.example.android.imageguess;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Debug;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,16 +40,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Initialisiert Bedienelemente
         initComponents();
 
-        //speicherung
-        sp = getSharedPreferences("your_prefs", context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sp.edit();
+        //speicherung:
+        sp = getSharedPreferences("your_prefs", MODE_PRIVATE);
 
-        player = new Player("Emil",sp.getInt("key_fortschritt",context.MODE_PRIVATE),sp.getInt("key_punkte",context.MODE_PRIVATE));
+        // läd gespeicherte werte in den player
+        player = new Player("Emil",sp.getInt("key_fortschritt",MODE_PRIVATE),sp.getInt("key_punkte",MODE_PRIVATE));
 
         context = this.getApplicationContext();
 
+        // weißt eventhandler zu
         for(int i = 0; i< 10; i++)
         {
             button_views.get(i).setOnClickListener(clickListener);
@@ -55,14 +59,17 @@ public class MainActivity extends AppCompatActivity {
         }
         button_views.get(0).setOnClickListener((clickListener));
 
+        //init button_arrays
         for (int i = 0; i < button_pressed.length; i++) {
             button_pressed[i] = false;
             button_view_pressed[i] = false;
         }
-        button_infos.get(1).setText(Integer.toString(sp.getInt("key_fortschritt",context.MODE_PRIVATE)));
+
+
         firstQuestion = true;
 
 
+        // ruft die erste Frage auf
         nextQuestion(new Question(context,player.getFortschritt()));
 
 
@@ -72,8 +79,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onStop(){
         super.onStop();
 
-        // Speicherung
-        sp = getSharedPreferences("your_prefs", context.MODE_PRIVATE);
+        // Speicherung über SharedPreferences
+        sp = getSharedPreferences("your_prefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
         editor.putInt("key_fortschritt", player.getFortschritt());
         editor.putInt("key_punkte",player.getPunkte());
@@ -86,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
     private void initComponents()
 
     {
+        // Initialisieren von allen Bedienelementen
         button_views.add((Button) findViewById(R.id.button_view_0));
         button_views.add((Button) findViewById(R.id.button_view_1));
         button_views.add((Button) findViewById(R.id.button_view_2));
@@ -117,7 +125,6 @@ public class MainActivity extends AppCompatActivity {
 
         LL_ViewButtons = (LinearLayout) findViewById(R.id.LinearLayout_ViewButtons);
 
-        LL_ViewButtons.setWeightSum(10);
 
     }
 
@@ -128,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
                 //eventhandler infobutton 2
                 if(view == button_infos.get(1))
                 {
-
+                    // evntl. Funktion
                 }
                 // EventHandler Eingabe Buttons
                 if (view == button_letters.get(i))
@@ -136,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
                     if(button_views.indexOf(getFirstEmptyView()) < currentQuestion.Name.length()) {
 
 
-                    if (button_pressed[i] == false) {
+                    if (!button_pressed[i]) {
                         // Setzt Letter Button gedrückt
                         button_pressed[i] = true;
                         //Setzt anzeigebutton auf gedrückt
@@ -144,7 +151,12 @@ public class MainActivity extends AppCompatActivity {
                         // Setzt ersten freien Anzeigebutton auf text von Letter Button
                         button_assosiation[button_views.indexOf(getFirstEmptyView())] = i;
 
-                        getFirstEmptyView().setText(button_letters.get(i).getText());
+                        try {
+                            getFirstEmptyView().setText(button_letters.get(i).getText());
+                        }catch(NullPointerException ex){
+                            Toast toast = Toast.makeText(context, ex.getMessage(),Toast.LENGTH_SHORT);
+                            toast.show();
+                        }
 
                         button_letters.get(i).setText("");
 
@@ -153,7 +165,6 @@ public class MainActivity extends AppCompatActivity {
                         }
 
 
-                    } else {
                     }
                 }
                 }
@@ -162,11 +173,8 @@ public class MainActivity extends AppCompatActivity {
                 if (button_views.get(i) == view)
                 {
                     // Falls AnzeigeButton nicht gedrückt
-                    if(button_view_pressed[i] == false) {
-                        // auf gedrückt gesetzt
-                        //button_view_pressed[i] = true;
-                        // Anzeigebutton text leeren
-                        //button_views.get(i).setText("");
+                    if(!button_view_pressed[i]) {
+                       // nicht passiert
                     }else{
                         // Setzt Anzeige Button als gedrückt
                         button_view_pressed[i] = false;
@@ -199,10 +207,19 @@ public class MainActivity extends AppCompatActivity {
         for(int i = 0; i<currentQuestion.Name.length();i++) {
             solution += button_views.get(i).getText();
         }
-        //button_infos.get(0).setText(solution);
-        //button_infos.get(1).setText(currentQuestion.Name.toUpperCase());
+
+
         try {
-            return solution.toUpperCase().equals(currentQuestion.Name.toUpperCase());
+
+            if(solution.toUpperCase().equals(currentQuestion.Name.toUpperCase())){
+                // bei Übereinfstimmung :
+                player.addPunkte();
+                player.addFortschritt();
+                return true;
+
+            }else{
+                return false;
+            }
         }catch (Exception ex){
             return false;
 
@@ -212,6 +229,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Button getFirstEmptyView()
     {
+        // Gibt ersten nicht Benutzten AnzeigeButton zurück
         for (int i = 0 ;i < 10;i++)
         {
             if(button_views.get(i).getText() == "")
@@ -226,20 +244,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void nextQuestion(Question _question)
     {
-        // Setzt den Fortschritt auf die Nächste Frage
-
-        if(firstQuestion) {
-            firstQuestion = false;
-
-
-        }
-        else{player.addFortschritt();
-            player.addPunkte();}
-
-
+        // Schreibt Punkte in Info-Button
         int Punkte = player.getPunkte();
         button_infos.get(0).setText(Integer.toString(Punkte));
-        // setzt bool array der buttons zurück
+
+        // setzt bool-arrays der buttons zurück
         for(int i = 0 ; i< 10;i++){
             button_views.get(i).setText("");
             button_letters.get(i).setText("");
@@ -259,7 +268,10 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
+        // Zeigt nächstes Bild an
         Anzeige.setImageResource(_question.getPictureResource().getImage());
+
+
     }
 
 }

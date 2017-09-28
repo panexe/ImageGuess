@@ -1,17 +1,15 @@
 package com.example.android.imageguess;
 
-/**
- * Created by android on 26.09.2017.
- */
 
-public class Player {
+class Player {
 
-    String Name;
 
-    int Punkte;
-    int Fortschritt;
+    private String Name;
 
-    public Player(String _name ,int _fortschritt , int _punkte)
+    private int Punkte;
+    private int Fortschritt;
+
+    Player(String _name, int _fortschritt, int _punkte)
     {
         Punkte = _punkte;
         Name = _name;
@@ -21,12 +19,12 @@ public class Player {
     public String getName(){
         return Name;
     }
-    public int getFortschritt(){
+    int getFortschritt(){
         return Fortschritt;
     }
-    public void addFortschritt(){
+    void addFortschritt(){
         Fortschritt++;
     }
-    public void addPunkte(){Punkte += 100;}
-    public int getPunkte(){return Punkte;}
+    void addPunkte(){Punkte += 100;}
+    int getPunkte(){return Punkte;}
 }

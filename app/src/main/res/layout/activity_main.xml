@@ -1,7 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:weightSum="100">
 
@@ -16,12 +15,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            style="?android:attr/buttonBarButtonStyle"
             />
         <Button
             android:id="@+id/button_info_1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            style="?android:attr/buttonBarButtonStyle"
             />
 
 
@@ -34,12 +35,11 @@
         android:weightSum="1"
         >
         <ImageView
+            android:contentDescription="@string/Bilder"
             android:id="@+id/imageview"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-
-
             />
 
     </LinearLayout>
@@ -56,60 +56,71 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            style="?android:attr/buttonBarButtonStyle"
             />
 
         <Button
             android:id="@+id/button_view_1"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            style="?android:attr/buttonBarButtonStyle"
+            />
         <Button
             android:id="@+id/button_view_2"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            style="?android:attr/buttonBarButtonStyle"
             />
         <Button
             android:id="@+id/button_view_3"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            style="?android:attr/buttonBarButtonStyle"
             />
         <Button
             android:id="@+id/button_view_4"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            style="?android:attr/buttonBarButtonStyle"
             />
         <Button
             android:id="@+id/button_view_5"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            style="?android:attr/buttonBarButtonStyle"
             />
         <Button
             android:id="@+id/button_view_6"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            style="?android:attr/buttonBarButtonStyle"
             />
         <Button
             android:id="@+id/button_view_7"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            style="?android:attr/buttonBarButtonStyle"
             />
         <Button
             android:id="@+id/button_view_8"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            style="?android:attr/buttonBarButtonStyle"
             />
         <Button
             android:id="@+id/button_view_9"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            style="?android:attr/buttonBarButtonStyle"
             />
 
     </LinearLayout>
@@ -128,35 +139,40 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="test" />
+            style="?android:attr/buttonBarButtonStyle"
+            />
 
         <Button
             android:id="@+id/button_letter_1"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="test" />
+            style="?android:attr/buttonBarButtonStyle"
+            />
 
         <Button
             android:id="@+id/button_letter_2"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="test" />
+            style="?android:attr/buttonBarButtonStyle"
+            />
 
         <Button
             android:id="@+id/button_letter_3"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="test" />
+            style="?android:attr/buttonBarButtonStyle"
+            />
 
         <Button
             android:id="@+id/button_letter_4"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="test" />
+            style="?android:attr/buttonBarButtonStyle"
+            />
 
 
     </LinearLayout>
@@ -174,34 +190,39 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="test" />
+            style="?android:attr/buttonBarButtonStyle"
+            />
 
         <Button
             android:id="@+id/button_letter_6"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="test" />
+            style="?android:attr/buttonBarButtonStyle"
+            />
 
         <Button
             android:id="@+id/button_letter_7"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="test" />
+            style="?android:attr/buttonBarButtonStyle"
+            />
 
         <Button
             android:id="@+id/button_letter_8"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="test" />
+            style="?android:attr/buttonBarButtonStyle"
+            />
         <Button
             android:id="@+id/button_letter_9"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="test" />
+            style="?android:attr/buttonBarButtonStyle"
+            />
 
 
     </LinearLayout>
