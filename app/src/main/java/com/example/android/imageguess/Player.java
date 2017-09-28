@@ -25,6 +25,7 @@ class Player {
     void addFortschritt(){
         Fortschritt++;
     }
+    void resetFortschirtt(){Fortschritt = 0;}
     void addPunkte(){Punkte += 100;}
     int getPunkte(){return Punkte;}
 }

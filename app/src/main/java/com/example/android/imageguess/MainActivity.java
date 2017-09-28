@@ -132,11 +132,6 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             for (int i = 0; i < 10; i++) {
-                //eventhandler infobutton 2
-                if(view == button_infos.get(1))
-                {
-                    // evntl. Funktion
-                }
                 // EventHandler Eingabe Buttons
                 if (view == button_letters.get(i))
                 {
@@ -173,9 +168,7 @@ public class MainActivity extends AppCompatActivity {
                 if (button_views.get(i) == view)
                 {
                     // Falls AnzeigeButton nicht gedrückt
-                    if(!button_view_pressed[i]) {
-                       // nicht passiert
-                    }else{
+                    if(button_view_pressed[i]) {
                         // Setzt Anzeige Button als gedrückt
                         button_view_pressed[i] = false;
                         // Setzt Letter Button als ungedrückt
@@ -185,17 +178,9 @@ public class MainActivity extends AppCompatActivity {
                         button_letters.get(button_assosiation[i]).setText(button_views.get(i).getText());
                         button_views.get(i).setText("");
 
-
                     }
 
                 }
-                // Eventhandler InfoButton
-                if(button_infos.get(0)== view)
-                {
-                    //evntl. Buy Hint
-                }
-
-
             }
         }
     };
@@ -214,7 +199,12 @@ public class MainActivity extends AppCompatActivity {
             if(solution.toUpperCase().equals(currentQuestion.Name.toUpperCase())){
                 // bei Übereinfstimmung :
                 player.addPunkte();
-                player.addFortschritt();
+                // damit Fortschritt nicht über die Bildanzahl hinaus geht
+                if(player.getFortschritt()  > currentQuestion.getPictureResource().getImgCount()){
+                    player.addFortschritt();
+                }else{
+                    player.resetFortschirtt();
+                }
                 return true;
 
             }else{

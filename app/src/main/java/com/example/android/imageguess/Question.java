@@ -45,7 +45,6 @@ class Question {
         }
 
         // Füllt Namen <10 Buchstaben mit zufälligen auf
-
         do
         {
             letters.add(Character.toString(abc.charAt(random.nextInt(26))));
