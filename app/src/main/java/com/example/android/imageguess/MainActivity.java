@@ -57,7 +57,8 @@ public class MainActivity extends AppCompatActivity {
             button_views.get(i).setOnClickListener(clickListener);
             button_letters.get(i).setOnClickListener(clickListener);
         }
-        button_views.get(0).setOnClickListener((clickListener));
+        button_infos.get(0).setOnClickListener(clickListener);
+        button_infos.get(1).setOnClickListener((clickListener));
 
         //init button_arrays
         for (int i = 0; i < button_pressed.length; i++) {
@@ -131,15 +132,27 @@ public class MainActivity extends AppCompatActivity {
     private OnClickListener clickListener = new OnClickListener() {
         @Override
         public void onClick(View view) {
+
+            //eventhandler infobutton 2
+            if(view == button_infos.get(0))
+            {
+                // Zeigt  Punkteanzahl
+                Toast.makeText(context, "Punkte: "+player.getPunkte(), Toast.LENGTH_SHORT).show();
+            }
+
+            // Eventhandler InfoButton
+            if(button_infos.get(1)== view)
+            {
+                // Zeigt Fragenanzahl
+                Toast.makeText(context,player.getFortschritt()+1 +"/"+ currentQuestion.getPictureResource().getImageCount(),Toast.LENGTH_SHORT).show();
+            }
+
             for (int i = 0; i < 10; i++) {
-                //eventhandler infobutton 2
-                if(view == button_infos.get(1))
-                {
-                    // evntl. Funktion
-                }
+
                 // EventHandler Eingabe Buttons
                 if (view == button_letters.get(i))
                 {
+
                     if(button_views.indexOf(getFirstEmptyView()) < currentQuestion.Name.length()) {
 
 
@@ -154,8 +167,7 @@ public class MainActivity extends AppCompatActivity {
                         try {
                             getFirstEmptyView().setText(button_letters.get(i).getText());
                         }catch(NullPointerException ex){
-                            Toast toast = Toast.makeText(context, ex.getMessage(),Toast.LENGTH_SHORT);
-                            toast.show();
+                            Toast.makeText(context, ex.getMessage(),Toast.LENGTH_SHORT).show();
                         }
 
                         button_letters.get(i).setText("");
@@ -189,11 +201,7 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                 }
-                // Eventhandler InfoButton
-                if(button_infos.get(0)== view)
-                {
-                    //evntl. Buy Hint
-                }
+
 
 
             }
@@ -214,7 +222,14 @@ public class MainActivity extends AppCompatActivity {
             if(solution.toUpperCase().equals(currentQuestion.Name.toUpperCase())){
                 // bei Übereinfstimmung :
                 player.addPunkte();
-                player.addFortschritt();
+
+                if(player.getFortschritt()+2 > (currentQuestion.getPictureResource().getImageCount())){
+                    player.resetFortschritt();
+                }
+                else{
+                    player.addFortschritt();
+                }
+
                 return true;
 
             }else{

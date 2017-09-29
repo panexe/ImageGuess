@@ -37,5 +37,6 @@ class PictureResource {
     int getImage(){
         return Image;
     }
+    int getImageCount(){return img.length;}
 
 }
